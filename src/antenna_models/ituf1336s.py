@@ -79,7 +79,7 @@ class ITUF1336s(BaseAntenna):
         'k_p': {
             'category': 'optional',
             'type': float,
-            'range': (0.001, 0.990),
+            'range': (0.001, 0.999),
         },
 
         # Parameter accomplishing the relative minimum gain for
@@ -87,7 +87,7 @@ class ITUF1336s(BaseAntenna):
         'k_a': {
             'category': 'optional',
             'type': float,
-            'range': (0.001, 0.990),
+            'range': (0.001, 0.999),
         },
 
         # Azimuth pattern adjustment factor based on leaked power.
@@ -95,7 +95,7 @@ class ITUF1336s(BaseAntenna):
         'k_h': {
             'category': 'optional',
             'type': float,
-            'range': (0.001, 0.990),
+            'range': (0.001, 0.999),
         },
 
         # Elevation pattern adjustment factor based on leaked power.
@@ -103,7 +103,7 @@ class ITUF1336s(BaseAntenna):
         'k_v': {
             'category': 'optional',
             'type': float,
-            'range': (0.001, 0.990),
+            'range': (0.001, 0.999),
         },
     }
 
@@ -188,14 +188,14 @@ class ITUF1336s(BaseAntenna):
         # Calculate h_loss and v_loss arrays' values
         for angle in angles:
             # calc. gain, then attenuation, then append
-            h_loss.append(round(g_max - self.gain(angle,0), 2))
+            h_loss.append(round(g_max - self.gain(azimuth=angle, elevation=0), 2))
             # need the azimuth to point back when elevation points back
             if 90 < angle < 270:
                 phi = 180
             else:
                 phi = 0
             # calc. gain, then attenuation, then append
-            v_loss.append(round(g_max - self.gain(phi, angle), 2))
+            v_loss.append(round(g_max - self.gain(azimuth=phi, elevation=angle), 2))
 
         # Complete specs dict. with angle/loss data
         self.specs['h_pattern_datapoint']['phi'] = angles
@@ -220,21 +220,21 @@ class ITUF1336s(BaseAntenna):
         return (31000.0 * 10 ** (-0.1 * g_0)) / phi_3
 
 
-    def gain(self, azimuth, elevation):
+    def gain(self, **kwargs):
         """Compute antenna gain (dBi) at given azimuth and elevation.
 
-        Parameters
-        ----------
-        azimuth : int or float
+        Keyword Args
+        ------------
+        azimuth (int or float) :
             Azimuth angle (degrees) in the horizontal plane at the
             site of the antenna measured from the azimuth of maximum gain
-        elevation : int or float
+        elevation (int or float) :
             Elevation angle (degree) measured from the horizontal plane
             at the site of antenna
 
         Returns
         -------
-        float
+        int or float
             Antenna gain (dBi) at given azimuth and elevation
 
         Notes
@@ -246,6 +246,28 @@ class ITUF1336s(BaseAntenna):
         - Recommends 3.2.2 (average side-lobe patterns in 6-70 GHz)
         - Recommends 3.4, 3.5 (for tilted antennas)
         """
+
+        # Define expected keys and their types
+        required_keys = {
+            "azimuth": (int, float),  # Accept int or float for azimuth
+            "elevation": (int, float)  # Accept int or float for elevation
+        }
+
+        # Check if all required keys are present
+        for key in required_keys:
+            if key not in kwargs:
+                raise KeyError(f"Missing required key: '{key}'")
+
+        # Validate the type of each provided value
+        for key, expected_types in required_keys.items():
+            value = kwargs[key]
+            if not isinstance(value, expected_types):
+                raise TypeError(f"Key '{key}' must be of type {expected_types}, got {type(value).__name__}")
+
+        # If validation passes, assign values to variables
+        azimuth = kwargs['azimuth']
+        elevation = kwargs['elevation']
+
         # Bring angles to expected ranges
         phi_h = self.__normalize_azimuth(azimuth)
         theta_h = self.__normalize_elevation(elevation)
@@ -267,6 +289,13 @@ class ITUF1336s(BaseAntenna):
                 return self.__gain_average_6_70ghz(phi, theta)
             else:  # follow 'peak' root
                 return self.__gain_peak_6_70ghz(phi, theta)
+
+
+    @staticmethod
+    def __validate_angle(angle):
+        if isinstance(angle, (int, float)):
+            raise TypeError(f"Angle must be either float or itn, got {type(angle).__name__}")
+
 
     @staticmethod
     def __normalize_azimuth(angle):

@@ -14,7 +14,7 @@ class BaseAntenna(ABC):
         self.specs = {
             'name': None,  # Name of the antenna
             'make': None,  # Manufacturer's name
-            'frequency': None,  # Design frequency of the antenna
+            'frequency': None,  # Design frequency of the antenna (MHz)
             'h_width': None,  #  Horizontal beamwidth (deg)
             'v_width': None,  #  Vertical beamwidth (deg)
             'front_to_back': None,  # Front to back ratio (dB)
@@ -93,7 +93,7 @@ class BaseAntenna(ABC):
 
 
     @abstractmethod
-    def gain(self, azimuth, elevation):
+    def gain(self, **kwargs):
         pass
 
 
@@ -124,6 +124,18 @@ class BaseAntenna(ABC):
         # Find the max loss value for scaling the radial axis
         v_max_loss = max(v_loss)
 
+        # For omni antennas, h_max_loss or v_max_loss could be so small,
+        # hence, to make better plot, it is either max of both, or 20 dB
+
+        max_val = max(h_max_loss, v_max_loss)
+        if max_val <=3:
+            h_max_loss = 20
+            v_max_loss = 20
+        else:
+            h_max_loss = max_val
+            v_max_loss = max_val
+
+
 
         # Create a figure with two polar subplots
         fig, (ax1, ax2) = plt.subplots(1, 2,
@@ -136,7 +148,7 @@ class BaseAntenna(ABC):
         ax1.set_theta_offset(np.pi / 2)  # rotate 90 deg. CCW
         ax1.set_theta_direction(-1)  # change direction to CW
         # Plot H-pattern
-        ax1.plot(h_phi, h_loss, label='H-plane', color='blue', linewidth=2)
+        ax1.plot(h_phi, h_loss, label='H-plane', color='blue', linewidth=3)
         # Title for H-pattern
         ax1.set_title('H-plane', va='bottom', fontsize=12)
         # Set 0 dB at the outer ring; max loss at the center
@@ -153,7 +165,7 @@ class BaseAntenna(ABC):
         # Second polar plot (V-pattern):
 
         # Plot V-pattern
-        ax2.plot(v_theta, v_loss, label='V-plane', color='blue', linewidth=2)
+        ax2.plot(v_theta, v_loss, label='V-plane', color='blue', linewidth=3)
         # Title for V-pattern
         ax2.set_title('E-plane', va='bottom', fontsize=12)
 
@@ -184,11 +196,11 @@ class BaseAntenna(ABC):
         # Add antenna settings/parameters to the figure
         info_txt = (
             f'{self.specs["name"]}, '
-            f'Freq.: {self.params['freq_range']}. '
-            f'Beamwidth: {self.params['beamwidth_az_deg']:,.1f} H/'
-            f'{self.params['beamwidth_el_deg']:,.1f} V deg., '
-            f'Gain: {self.params['max_gain_dbi']:,.1f} dBi, '
-            f'Tilting: {self.params['tilt_angle_deg']} deg. '
+            f'Freq.: {self.specs['frequency']} MHz. '
+            f'Beamwidth: {self.specs['h_width']:,.1f} H/'
+            f'{self.specs['v_width']:,.1f} V deg., '
+            f'Gain: {self.specs['gain']:,.1f} dBi, '
+            f'Tilting: {self.specs['tilt']} deg. '
             f'{self.specs['comment']}'
         )
 

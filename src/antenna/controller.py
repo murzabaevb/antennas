@@ -23,8 +23,8 @@ class Antenna:
                     obj = getattr(module, cls)
                     if isinstance(obj, type) and issubclass(obj, BaseAntenna) and obj is not BaseAntenna:
                         self._model_registry[obj.__name__] = obj
-"""
+    """
     def export(self, exporter, filename='export.csv'):
         data = self.model.specs()
         exporter.export(data, filename)
-"""
+    """

@@ -1,4 +1,4 @@
-from .ituf1336 import ITUF1336
-from .itum2101 import ITUM2101
+from .ituf1336s import ITUF1336s
+from .ituf1336o import ITUF1336o
 
-__all__ = ['ITUF1336', 'ITUM2101']
+__all__ = ['ITUF1336s', 'ITUF1336o']

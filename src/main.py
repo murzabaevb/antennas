@@ -3,34 +3,36 @@ from exporters.csv_export import CSVExport
 from exporters.json_export import JSONExport
 
 # Create an ITU-F.1336 Sectoral antenna
-ant = Antenna('ITUF1336s')
+ant2 = Antenna('ITUF1336s')
 
 # Set antenna's parameters
-ant.model.set_params(
+ant2.model.set_params(
     oper_freq_mhz=500,
-    max_gain_dbi=17.0,
-    beamwidth_az_deg=65.0,
-    pattern_type='peak',
-    performance_type='typical',
-    tilt_type='mechanical',
-    tilt_angle_deg=12,
+    max_gain_dbi=7.0,
+    beamwidth_az_deg=30.0,
+    beamwidth_el_deg=10.8,
+    pattern_type='average',
+    performance_type='improved',
+    tilt_type='none',
+    tilt_angle_deg=8,
+    #k=0.9,
 )
 
-#print(ant.model.params)
+# test gain calculation
+#print(ant2.model.gain(azimuth=0, elevation=13))
 
-# test output
-print(ant.model.gain(0, 0))
-print(ant.model.gain(0, 90))
-print(ant.model.gain(180, 270))
-print(ant.model.gain(180, 0))
+# test pattern diagrams
 
-ant.model.show_patterns()
+
+ant2.model.show_patterns()
+#print(ant2.model.specs['h_pattern_datapoint']['loss'])
+#print(f'\n')
+#print(ant2.model.specs['v_pattern_datapoint']['loss'])
 """
 # Export to CSV
 csv_exporter = CSVExport()
 ant.export(csv_exporter, filename='f1336_data.csv')
-
-# Export to JSON
-json_exporter = JSONExport()
-ant.export(json_exporter, filename='f1336_data.json')
 """
+# Export to JSON
+#json_exporter = JSONExport()
+#ant2.export(json_exporter, filename='f1336_data.json')
