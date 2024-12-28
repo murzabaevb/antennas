@@ -386,9 +386,16 @@ class ITUF1336s(BaseAntenna):
         # Refer to [1] formula (3c)
         theta_rad = math.radians(theta)
         cos_theta = math.cos(theta_rad)
-        acos_arg = ((cos_theta_h * cos_phi_h * cos_beta
-                    - sin_theta_h * sin_beta)
-                    / cos_theta)
+        # acos_arg = ((cos_theta_h * cos_phi_h * cos_beta
+        #             - sin_theta_h * sin_beta)
+        #             / cos_theta)
+        acos_arg = (
+                (
+                        -sin_theta_h * sin_beta
+                        + cos_theta_h * cos_phi_h * cos_beta
+                )
+                / cos_theta
+        )
         acos_arg = max(-1.0, min(1.0, acos_arg))  # clamp by [-1, 1]
         phi = math.degrees(math.acos(acos_arg))
 
