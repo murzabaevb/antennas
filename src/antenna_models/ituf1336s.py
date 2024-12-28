@@ -292,12 +292,6 @@ class ITUF1336s(BaseAntenna):
 
 
     @staticmethod
-    def __validate_angle(angle):
-        if isinstance(angle, (int, float)):
-            raise TypeError(f"Angle must be either float or itn, got {type(angle).__name__}")
-
-
-    @staticmethod
     def __normalize_azimuth(angle):
         """Normalize angle to be between -180 and +180 degrees.
 
@@ -386,10 +380,9 @@ class ITUF1336s(BaseAntenna):
 
         # Calculate modified theta and phi for mechanical tilt case
         # Refer to [1] formula (3b)
-        theta = math.degrees(math.asin(
-                sin_theta_h * cos_beta
-                + cos_theta_h * cos_phi_h * sin_beta
-        ))
+        asin_arg = sin_theta_h * cos_beta + cos_theta_h * cos_phi_h * sin_beta
+        asin_arg = max(-1.0, min(1.0, asin_arg))  # clamp by [-1, 1]
+        theta = math.degrees(math.asin(asin_arg))
         # Refer to [1] formula (3c)
         theta_rad = math.radians(theta)
         cos_theta = math.cos(theta_rad)

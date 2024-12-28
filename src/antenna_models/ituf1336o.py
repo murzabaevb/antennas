@@ -87,7 +87,7 @@ class ITUF1336o(BaseAntenna):
         if self.params.get('beamwidth_el_deg') is None:
             # Ref to [1] Formula (23b)
             g_0 = self.params['max_gain_dbi']
-            self.params['beamwidth_el_deg'] = 107.6 * 10 ** (-0.1 * g_0)
+            self.params['beamwidth_el_deg'] = 107.6 * 10**(-0.1 * g_0)
 
         # Set downward tilt angle (degrees) if not set
         if (self.params.get('tilt_angle_deg') is None
@@ -319,7 +319,7 @@ class ITUF1336o(BaseAntenna):
         k = self.params['k']
         theta_3 = self.params['beamwidth_el_deg']
 
-        theta_5 = theta_3 * math.sqrt(1.25 + 1 / 1.2 * math.log10(k + 1))
+        theta_5 = theta_3 * math.sqrt(1.25 - 1 / 1.2 * math.log10(k + 1))
         theta_abs = math.fabs(theta)
 
         if 0 <= theta_abs < theta_3:

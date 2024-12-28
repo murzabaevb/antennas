@@ -11,6 +11,7 @@ class BaseAntenna(ABC):
 
     def __init__(self):
         self.params = {}
+        # Refer to MSI Planet file format description
         self.specs = {
             'name': None,  # Name of the antenna
             'make': None,  # Manufacturer's name
@@ -214,5 +215,16 @@ class BaseAntenna(ABC):
         plt.show()
 
 
-    def export_pattern(self):
-        pass
+    def export(self, exporter, filename):
+        """
+        Export the antenna's specifications using the given exporter.
+
+        Parameters:
+            exporter: An instance of an export class (e.g., CSVExport, JSONExport, YAMLExport).
+            filename: The name of the output file.
+        """
+        # Update specs property
+        self._update_specs()
+
+        # Export the data
+        exporter.export(self.specs, filename)
