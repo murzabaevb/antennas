@@ -5,6 +5,8 @@ References:
     and mobile services for use in sharing studies in the
     frequency range from 400 MHz to about 70 GHz"
 """
+
+
 import math
 from antenna.base import BaseAntenna
 
