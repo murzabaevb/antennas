@@ -62,11 +62,11 @@ To contribute a new antenna model to the project, you need to follow these guide
      - `_post_set_params()`: This is a hook for subclasses to set dependent parameters in case if functionality of `set_params()` is not enough. The subclass can rewrite it. It is invoked automatically at the end of `set_params()` method.
      - `show_patterns()`: Displays the antenna radiation patterns as per the `specs` property of the object.
      - `export()`: Exports the antenna radiation data contained in the `specs` property of the object to a file in the specified format (e.g. CSV, JSON, MSI).
-     - `_update_specs()`: Abstract method to be implemented in subclasses. Updates the `specs` property of the object. It is invoked automatically at the begining of `show_patterns()` and `export()` methods.
+     - `_update_specs()`: Abstract method to be implemented in subclasses. Updates the `specs` property of the object. It is invoked automatically at the beginning of `show_patterns()` and `export()` methods.
      - `gain()`: Abstract method to be implemented in subclasses. Returns the antenna gain at the angle/angles passed to the function as keyword arguments.
      
 
-2. **Antenna Models** (e.g., `ITUF699`, `ITUF1245` etc., located in `src/antenna_models/`)
+2. **Antenna Models** (e.g., `ITUF699`, `ITUF1245` etc., located in `src/antenna/antenna_models/`)
    - **Purpose**: Implement specific antenna model based on ITU-R Recommendation.
    - **Expected Properties**:
    - `PARAMS` : dictionary. Set of mandatory, conditional and optional keyword arguments, value types and their ranges used for setting the specifications of the antenna.
@@ -78,7 +78,7 @@ To contribute a new antenna model to the project, you need to follow these guide
 #### **Steps to Add a New Model**
 
 1. **Create a New Class**:
-   - Place the new class in the `src/antenna_models/` directory.
+   - Place the new class in the `src/antenna/antenna_models/` directory.
    - Inherit from `BaseAntenna`.
 
    ```python

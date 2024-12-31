@@ -9,9 +9,14 @@ setup(
     author_email='b.b.murzabaev@gmail.com',
     url='https://github.com/murzabaevb/antennas.git',
     download_url='https://github.com/murzabaevb/antennas.git',
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
+    packages=find_packages(where="src"),  # Discover packages under src/
+    package_dir={"": "src"},  # Map package directory root to src/
+    include_package_data=True,  # Include additional files specified in MANIFEST.in
+    package_data={
+        "antenna": ["antenna_models/*", "exporter/*"],  # Include both antenna_models and exporter
+    },
     license='GNU General Public License',
     license_files='https://www.gnu.org/licenses/',
     keywords='itu,itu-r,antenna,pattern,gain,699,1245,1336',
 )
+

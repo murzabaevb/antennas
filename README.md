@@ -37,17 +37,23 @@ The project is designed to be modular and extensible, allowing users to implemen
    git clone https://github.com/murzabaevb/antennas.git
    cd antennas
    ```
-
+   If you wish to work with isolated environment, you may set up and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   # source venv/bin/activate  # On POSIX Platform
+   # venv\Scripts\activate.bat  # On Windows: 
+   ```
+   
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Run setup:
+3. Install the package in editable mode:
    ```bash
-   python setup.py install
+   pip install -e .
    ```
-
+4. Run `tests/general_test.py` to test the overall functioning and functionalities of the package.
 ---
 
 ### Usage
@@ -271,12 +277,12 @@ your_antenna_name.model.show_patterns()
 ```
 **Export antenna parameters to files**
 
-To export the radiation patterns of the antenna and values of the parameters used to model a particular antenna, an Object of relevant Export class needs to be created first. Depending on the needs you might import any required exporter class or all.
+To export the radiation patterns of the antenna and values of the parameters used to model a particular antenna, an Object of relevant Export class needs to be created first. Prior to creating exporter object, you need to import any required exporter class as shown below.
 ```python
-from exporters.csv_export import CSVExport
-from exporters.json_export import JSONExport
-from exporters.yaml_export import YAMLExport
-from exporters.msi_export import MSIExport
+from antenna.exporters.csv_export import CSVExport
+from antenna.exporters.json_export import JSONExport
+from antenna.exporters.yaml_export import YAMLExport
+from antenna.exporters.msi_export import MSIExport
 
 your_exporter = ExportClass()
 ```
@@ -334,15 +340,17 @@ antennas/
 │
 ├── src/                        # Source code
 │   ├── antenna/                # Core logic
-│   ├── antenna_models/         # Antenna models
-│   ├── exporters/              # Export utilities
-│   ├── test.py                 # Package testings
+│       ├── antenna_models/     # Antenna models
+│       ├── exporters/          # Export utilities
 │
+├── tests/                      # Package testings
 ├── exports/                    # Exported files
 ├── docs/                       # Documentation
 ├── img/                        # Images
+├── notebooks/                  # PARAMS testing aid
 ├── requirements.txt            # Dependencies
 ├── setup.py                    # Package configuration
+├── MANIFEST.in                 # Package add. files
 ├── README.md                   # Project overview
 ├── LICENSE.txt                 # License information
 └── CONTRIBUTING.md             # Contribution guidelines
@@ -364,6 +372,6 @@ This project is licensed under the GNU General Public License. See the [LICENSE]
 
 ## Contact
 
-For inquiries or issues, please open an [issue](https://github.com/murzabaevb/antennas/issues) or contact me at [b b murzabaev @gmail.com](mailto:b.b.murzabaev@gmail.com).
+For inquiries or issues, please open an [issue](https://github.com/murzabaevb/antennas/issues) or contact me at b.b.murzabaev @ gmail.com.
 
 ---

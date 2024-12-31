@@ -1,8 +1,8 @@
 from antenna.controller import Antenna
-from exporters.csv_export import CSVExport
-from exporters.json_export import JSONExport
-from exporters.yaml_export import YAMLExport
-from exporters.msi_export import MSIExport
+from antenna.exporters.csv_export import CSVExport
+from antenna.exporters.json_export import JSONExport
+from antenna.exporters.yaml_export import YAMLExport
+from antenna.exporters.msi_export import MSIExport
 
 
 # Create an object of ITUF1336s Class (sectoral antenna)
@@ -33,16 +33,16 @@ my_antenna.model.show_patterns()
 
 # Export antenna specs to files
 my_csv_exporter = CSVExport()  # CSV exporter object
-my_antenna.export(my_csv_exporter, '../exports/f1336s_ant.csv')
+my_antenna.export(my_csv_exporter, 'f1336s_ant.csv')
 
 my_json_exporter = JSONExport()  # JSON exporter object
-my_antenna.export(my_json_exporter, '../exports/f1336s_ant.json')
+my_antenna.export(my_json_exporter, 'f1336s_ant.json')
 
 my_yaml_exporter = YAMLExport()  # YAML exporter object
-my_antenna.export(my_yaml_exporter, '../exports/f1336s_ant.yaml')
+my_antenna.export(my_yaml_exporter, 'f1336s_ant.yaml')
 
 my_msi_exporter = MSIExport()  # MSI exporter object
-my_antenna.export(my_msi_exporter, '../exports/f1336s_ant.msi')
+my_antenna.export(my_msi_exporter, 'f1336s_ant.msi')
 
 # Modify antenna to suite TETRA BTS 410-430 MHz as per source [2]
 my_antenna.model.set_params(
