@@ -98,6 +98,7 @@ Depending on the argument passed to the constructor in step 2 above, the followi
 |`diameter_m`|optional| `int, float` | `(0.001, 99.999)`    | antenna diameter (m)|
 |`max_gain_dbi`|optional| `int, float` | `(-29.9, 89.9)`      | max. main-lobe ant. gain (dBi)|
 |`beamwidth_deg`|optional| `int, float` | `(0.001, 179.999  )` | 3dB beamwidth (deg.)|
+
 *Note: although ant. diameter, max. gain and beamwidth are indicated as optional, at least one of these must be provided when setting the antenna's parameters.*
 
 ---
@@ -111,6 +112,7 @@ Depending on the argument passed to the constructor in step 2 above, the followi
 |`calc_opt`|mandatory| `str`          | `'Rec. 2', 'Rec. 3'` | refer to Note 1 below|
 |`max_gain_dbi`|optional|`int, float`| `(-29.9, 89.9 ) `    | max. main-lobe ant. gain (dBi)|
 |`diameter_m`|optional|`int, float`| `(0.001, 99.999  ) ` | antenna diameter (m)|
+
 *Note 1: These are the sections of the Rec. ITU-R F.1245 that describing when a particular calculation method is suitable:*
 - *Recommends 2: Average radiation patterns of FWS antennas;*
 - *Recommends 3: Generalized radiation patterns of point-to-point FWS antennas.*
