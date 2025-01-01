@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
+import textwrap
 import matplotlib.pyplot as plt
 import numpy as np
-import textwrap
 
 
 class BaseAntenna(ABC):

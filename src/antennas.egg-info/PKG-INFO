@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: antennas
+Version: 1.0.0
+Summary: ITU-R antenna models
+Home-page: https://github.com/murzabaevb/antennas.git
+Download-URL: https://github.com/murzabaevb/antennas.git
+Author: Bakyt-Bek Murzabaev
+Author-email: b.b.murzabaev@gmail.com
+License: GNU General Public License
+Keywords: itu,itu-r,antenna,pattern,gain,699,1245,1336
+
+Provides functions for calculation of antenna gains, displaying radiation patterns and their exports

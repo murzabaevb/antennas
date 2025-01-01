@@ -13,7 +13,7 @@ setup(
     package_dir={"": "src"},  # Map package directory root to src/
     include_package_data=True,  # Include additional files specified in MANIFEST.in
     package_data={
-        "antenna": ["antenna_models/*", "exporter/*"],  # Include both antenna_models and exporter
+        "": ["antenna_models/*", "exporter/*"],  # Include both antenna_models and exporter
     },
     license='GNU General Public License',
     license_files='https://www.gnu.org/licenses/',

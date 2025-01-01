@@ -7,7 +7,7 @@ assessment in the frequency range from 100 MHz to 86 GHz"
 
 
 import math
-from antenna.base import BaseAntenna
+from base import BaseAntenna
 
 
 class ITUF699(BaseAntenna):

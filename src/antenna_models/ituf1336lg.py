@@ -8,7 +8,7 @@ References:
 
 
 import math
-from antenna.base import BaseAntenna
+from base import BaseAntenna
 
 
 class ITUF1336lg(BaseAntenna):

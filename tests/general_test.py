@@ -1,8 +1,8 @@
-from antenna.controller import Antenna
-from antenna.exporters.csv_export import CSVExport
-from antenna.exporters.json_export import JSONExport
-from antenna.exporters.yaml_export import YAMLExport
-from antenna.exporters.msi_export import MSIExport
+from controller import Antenna
+from exporters.csv_export import CSVExport
+from exporters.json_export import JSONExport
+from exporters.yaml_export import YAMLExport
+from exporters.msi_export import MSIExport
 
 
 # Create an object of ITUF1336s Class (sectoral antenna)

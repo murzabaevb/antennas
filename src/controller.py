@@ -1,6 +1,6 @@
 import importlib
 import os
-from antenna.base import BaseAntenna
+from base import BaseAntenna
 
 
 class Antenna:

@@ -8,7 +8,7 @@ from 1 GHz to 86 GHz"
 
 
 import math
-from antenna.base import BaseAntenna
+from base import BaseAntenna
 
 
 class ITUF1245(BaseAntenna):
