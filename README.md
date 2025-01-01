@@ -61,7 +61,7 @@ The project is designed to be modular and extensible, allowing users to implemen
 #### 1. Import the Antenna module
 
 ```python
-from antenna.controller import Antenna
+from controller import Antenna
 ```
 
 #### 2. Create an Object of the Antenna class
@@ -279,10 +279,10 @@ your_antenna_name.model.show_patterns()
 
 To export the radiation patterns of the antenna and values of the parameters used to model a particular antenna, an Object of relevant Export class needs to be created first. Prior to creating exporter object, you need to import any required exporter class as shown below.
 ```python
-from antenna.exporters.csv_export import CSVExport
-from antenna.exporters.json_export import JSONExport
-from antenna.exporters.yaml_export import YAMLExport
-from antenna.exporters.msi_export import MSIExport
+from exporters.csv_export import CSVExport
+from exporters.json_export import JSONExport
+from exporters.yaml_export import YAMLExport
+from exporters.msi_export import MSIExport
 
 your_exporter = ExportClass()
 ```
@@ -338,10 +338,9 @@ my_antenna.model.set_params(
 ```
 antennas/
 │
-├── src/                        # Source code
-│   ├── antenna/                # Core logic
-│       ├── antenna_models/     # Antenna models
-│       ├── exporters/          # Export utilities
+├── src/                        # Source code/Core logic
+│   ├── antenna_models/         # Antenna models
+│   ├── exporters/              # Export utilities
 │
 ├── tests/                      # Package testings
 ├── exports/                    # Exported files

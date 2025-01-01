@@ -51,7 +51,7 @@ To contribute a new antenna model to the project, you need to follow these guide
 
 #### **Overview of Main Classes**
 
-1. **`BaseAntenna`** (Located in `src/antenna/base.py`)
+1. **`BaseAntenna`** (Located in `src/base.py`)
    - **Purpose**: Serves as the base class for all antenna models.
    - **Key Responsibilities**:
      - Provide a consistent structure for all models.
@@ -66,7 +66,7 @@ To contribute a new antenna model to the project, you need to follow these guide
      - `gain()`: Abstract method to be implemented in subclasses. Returns the antenna gain at the angle/angles passed to the function as keyword arguments.
      
 
-2. **Antenna Models** (e.g., `ITUF699`, `ITUF1245` etc., located in `src/antenna/antenna_models/`)
+2. **Antenna Models** (e.g., `ITUF699`, `ITUF1245` etc., located in `src/antenna_models/`)
    - **Purpose**: Implement specific antenna model based on ITU-R Recommendation.
    - **Expected Properties**:
    - `PARAMS` : dictionary. Set of mandatory, conditional and optional keyword arguments, value types and their ranges used for setting the specifications of the antenna.
@@ -78,11 +78,11 @@ To contribute a new antenna model to the project, you need to follow these guide
 #### **Steps to Add a New Model**
 
 1. **Create a New Class**:
-   - Place the new class in the `src/antenna/antenna_models/` directory.
+   - Place the new class in the `src/antenna_models/` directory.
    - Inherit from `BaseAntenna`.
 
    ```python
-   from antenna.base import BaseAntenna
+   from base import BaseAntenna
 
    class NewAntennaModel(BaseAntenna):
         def __init__(self):
