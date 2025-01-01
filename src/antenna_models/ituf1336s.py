@@ -157,17 +157,17 @@ class ITUF1336s(BaseAntenna):
         """Update specs data."""
         # Indicate all parameters used in the modeling in comment
         comment_str = (
-                f'Side-lobe: '
-                f'{self.params['pattern_type']}/'
-                f'{self.params['performance_type']}, '
-                f'tilting: {self.params['tilt_type']}, '
-                f'kp={self.params['k_p']}, '
-                f'ka={self.params['k_a']}, '
-                f'kh={self.params['k_h']}, '
-                f'kv={self.params['k_v']}'
+                f"Side-lobe: "
+                f"{self.params['pattern_type']}/"
+                f"{self.params['performance_type']}, "
+                f"tilting: {self.params['tilt_type']}, "
+                f"kp={self.params['k_p']}, "
+                f"ka={self.params['k_a']}, "
+                f"kh={self.params['k_h']}, "
+                f"kv={self.params['k_v']}"
         )
 
-        self.specs["name"] = 'ITU-R F.1336-5 Sectoral'
+        self.specs['name'] = 'ITU-R F.1336-5 Sectoral'
         self.specs['make'] = 'ITU'
         self.specs['frequency'] = self.params['freq_range']
         self.specs['h_width'] = self.params['beamwidth_az_deg']

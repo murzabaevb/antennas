@@ -140,10 +140,10 @@ class ITUF699(BaseAntenna):
         """Update specs data."""
         # Indicate all parameters used in the modeling in comment
         comment_str = (
-                f'Ant. diam to wavelength ratio: {self.params['d_to_l']:,.2f}'
+                f"Ant. diam to wavelength ratio: {self.params['d_to_l']:,.2f}"
         )
 
-        self.specs["name"] = 'ITU-R F.699-8'
+        self.specs['name'] = 'ITU-R F.699-8'
         self.specs['make'] = 'ITU'
         self.specs['frequency'] = self.params['oper_freq_mhz']
         # Calculate 3 dB beamwidth in azimuth and elevation planes

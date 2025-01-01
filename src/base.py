@@ -196,13 +196,13 @@ class BaseAntenna(ABC):
 
         # Add antenna settings/parameters to the figure
         info_txt = (
-            f'{self.specs["name"]}, '
-            f'Freq.: {self.specs['frequency']} MHz. '
-            f'Beamwidth: {self.specs['h_width']:,.1f} H/'
-            f'{self.specs['v_width']:,.1f} V deg., '
-            f'Gain: {self.specs['gain']:,.1f} dBi, '
-            f'Tilting: {self.specs['tilt']} deg. '
-            f'{self.specs['comment']}'
+            f"{self.specs['name']}, "
+            f"Freq.: {self.specs['frequency']} MHz. "
+            f"Beamwidth: {self.specs['h_width']:,.1f} H/"
+            f"{self.specs['v_width']:,.1f} V deg., "
+            f"Gain: {self.specs['gain']:,.1f} dBi, "
+            f"Tilting: {self.specs['tilt']} deg. "
+            f"{self.specs['comment']}"
         )
 
         wrapped_text = "\n".join(textwrap.wrap(info_txt, width=40))
