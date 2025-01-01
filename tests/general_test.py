@@ -78,7 +78,7 @@ print(f'G = {my_antenna.model.gain(off_axis_angle=15.2):,.2f} dBi')
 my_antenna.model.show_patterns()
 
 # Export the radiation patterns to MSI file
-my_antenna.export(my_msi_exporter, '../exports/f699_ant.msi')
+my_antenna.export(my_msi_exporter, 'f699_ant.msi')
 
 # Delete antenna object
 del my_antenna
@@ -100,7 +100,7 @@ print(f'G = {my_antenna.model.gain(off_axis_angle=15.2):,.2f} dBi')
 my_antenna.model.show_patterns()
 
 # Export the radiation patterns to MSI file
-my_antenna.export(my_msi_exporter, '../exports/f1245_ant.msi')
+my_antenna.export(my_msi_exporter, 'f1245_ant.msi')
 
 # Modify antenna settings to suite specs provided below based on max. gain
 # https://www.commscope.com/globalassets/digizuite/957219-p360-usx6-3-4wh-external.pdf
