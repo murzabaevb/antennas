@@ -19,15 +19,11 @@ The project is designed to be modular and extensible, allowing users to implemen
 
 ---
 
-![Sectoral antenna](https://github.com/murzabaevb/antennas/blob/master/img/TETRA%20BTS%20410-430MHz.png)
+![TETRA BTS antenna](https://github.com/murzabaevb/antennas/blob/master/img/TETRA%20BTS%20410-430MHz.png)
 
 ---
 
-![Microwave antenna](https://github.com/murzabaevb/antennas/blob/master/img/P2P%20Link%204GHz%20average%20side%20lobes%20v2.png)
-
----
-
-![Microwave antenna](https://github.com/murzabaevb/antennas/blob/master/img/P2P%20Link%2026GHz%20peak%20side%20lobes.png)
+![NR BTS antenna](https://github.com/murzabaevb/antennas/blob/master/img/IMT BTS 3-6GHz.png?raw=true)
 
 ---
 ### Installation
@@ -53,7 +49,7 @@ The project is designed to be modular and extensible, allowing users to implemen
    ```bash
    pip install -e .
    ```
-4. Run `tests/general_test.py` to test the overall functioning and functionalities of the package.
+4. Run `tests/test_general.py` to test the overall functioning and functionalities of the package.
 ---
 
 ### Usage
