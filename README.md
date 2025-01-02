@@ -23,7 +23,7 @@ The project is designed to be modular and extensible, allowing users to implemen
 
 ---
 
-![NR BTS antenna](https://github.com/murzabaevb/antennas/blob/master/img/IMT BTS 3-6GHz.png?raw=true)
+![NR BTS antenna](https://github.com/murzabaevb/antennas/blob/master/img/IMT%20BTS%203-6GHz.png)
 
 ---
 ### Installation
