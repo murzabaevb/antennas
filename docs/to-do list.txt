@@ -1,0 +1,9 @@
+## Models in to-do list:
+
+1.	S.1855		ES GSO FSS	2-31 GHz	coordination and interference assessment (alt. patterns)
+2.  S.2196      ES antenna patterns main lobe and transition to S.465 / S.1855
+
+-.	S.1717		Electronic data exchange format (ant. patterns) to consider in the future
+
+## Collection of ITU Antenna Patterns
+[Antenna Patterns](https://www.itu.int/en/ITU-R/software/Pages/ant-pattern.aspx)

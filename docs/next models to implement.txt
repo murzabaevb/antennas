@@ -1,5 +1,0 @@
-1.	S.465		ES GSO FSS	2-31 GHz	coordination and interference assessment
-2.	S.1855		ES GSO FSS	2-31 GHz	coordination and interference assessment (alt. patterns)
-3.	S.580		ES GSO FSS	n/a		design objectives
-
-0.	S.1717		ES		n/a		electronic data file (ant. patterns)

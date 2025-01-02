@@ -12,7 +12,7 @@ The project is designed to be modular and extensible, allowing users to implemen
 
 ### Features
 
-- **modular antenna models**: Includes (so far) implementations for Rec. ITU-F.699, ITU-R F.1245, ITU-F.1336, ITU-R S.465.
+- **modular antenna models**: Includes (so far) implementations for Rec. ITU-F.699, ITU-R F.1245, ITU-F.1336, ITU-R S.465, ITU-R S.580.
 - **flexible export options**: Supports exporting radiation patterns to CSV, JSON, YAML, MSI file formats.
 - **easy-to-use framework**: Provides a base class for creating and managing antenna models.
 - **extensible**: Add other ITU-R and custom models as well as exporters with minimal effort.
@@ -71,14 +71,15 @@ your_antenna_name = Antenna('Model_name')
 
 Below is the list of arguments one of which has to be passed to the constructor of the Antenna class when creating an Object:
 
-| Model_name   | Rec. ITU-R                                          | Antenna radiation patterns suitable for                                                                          |
-|--------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `ITUF699`    | [F.699-8](https://www.itu.int/rec/R-REC-F.699/en)   | Fixed wireless system in 0.1-86 GHz range. Models the peak envelope of side-lobe patterns                        |
-| `ITUF1245`   | [F.1245-3](https://www.itu.int/rec/R-REC-F.1245/en) | P2P fixed wireless system in 1-86 GHz range. Models the average radiation patterns                               |
-| `ITUF1336lg` | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Low-Gain ant. below 20 dBi) in 1-3 GHz range. Models peak side-lobe patterns.             |
-| `ITUF1336o`  | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Omnidirectional ant.) in 0.4-70 GHz range. Models both peak and average side-lobe patterns |
-| `ITUF1336s`  | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Sectoral ant.) in 0.4-70 GHz range. Models both peak and average side-lobe patterns       |
-| `ITUS465`    | [S.465-6](https://www.itu.int/rec/R-REC-S.465/en)  | FSS ES (peak side-lobe patterns) for coordination/interference assessment in 2-31 GHz range                      |
+| Model_name  | Rec. ITU-R                                          | Antenna radiation patterns suitable for                                                                           |
+|-------------|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| `ITUF699`   | [F.699-8](https://www.itu.int/rec/R-REC-F.699/en)   | Fixed wireless system in 0.1-86 GHz range. Models the peak envelope of side-lobe patterns                         |
+| `ITUF1245`  | [F.1245-3](https://www.itu.int/rec/R-REC-F.1245/en) | P2P fixed wireless system in 1-86 GHz range. Models the average radiation patterns                                |
+| `ITUF1336lg` | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Low-Gain ant. below 20 dBi) in 1-3 GHz range. Models peak side-lobe patterns.              |
+| `ITUF1336o` | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Omnidirectional ant.) in 0.4-70 GHz range. Models both peak and average side-lobe patterns |
+| `ITUF1336s` | [F.1336-5](https://www.itu.int/rec/R-REC-F.1336/en) | Fixed/Mobile services (Sectoral ant.) in 0.4-70 GHz range. Models both peak and average side-lobe patterns        |
+| `ITUS465`   | [S.465-6](https://www.itu.int/rec/R-REC-S.465/en)   | FSS ES (peak side-lobe patterns) for coordination/interference assessment in 2-31 GHz range                       |
+| `ITUS580`   | [S.580-6](https://www.itu.int/rec/R-REC-S.580/en)   | FSS GSO ES (peak side-lobe patterns) antenna design objectives                                                    |
 
 Below examples show the creation of antenna objects based on needs and requirements.
 ```python
@@ -88,6 +89,7 @@ ant_3 = Antenna('ITUF1336lg')  # Low-gain directional antenna
 ant_4 = Antenna('ITUF1336o')  # Omnidirectional antenna
 ant_5 = Antenna('ITUF1336s')  # Sectoral antenna
 ant_6 = Antenna('ITUS465')  # ES antenna 2-31 GHz
+ant_7 = Antenna('ITUS580')  # GSO ES antenna
 ```
 
 #### 3. Set the parameters of the antenna as needed
@@ -101,6 +103,16 @@ your_antenna_name.model.set_params(
 )
 ```
 Depending on the argument passed to the constructor in step 2 above, the following keyword arguments are to be used when setting the parameters of the antenna. If the optional parameters are not provided, either default parameters are used or they are deduced using other provided mandatory parameters based on relevant recommendations/sources:
+
+**For 'ITUS580'**
+
+| Keyword      | Requirement | Value type   | Range             | Description                                                  |
+|--------------|-------------|--------------|-------------------|--------------------------------------------------------------|
+| `oper_freq_mhz` | optional    | `int, float` | `(1000, 100000)`  | operating frequency (MHz)                                    |
+|`diameter_m`| optional    | `int, float` | `(0.001, 14.999)` | antenna diameter (m)                                         |
+|`d_to_l`| optional    | `int, float` | `(50, 10000)`     | Antenna diameter to wavelength ratio (both in the same unit) |
+
+*Note: although the frequency, ant. diameter, and D/lambda ratio are indicated as optional, the calculation method is based on D/lambda ratio. Therefore, if D/lambda ratio is not provided, then both frequency and ant. diameter have to be provided together.*
 
 ---
 
@@ -252,7 +264,7 @@ your_antenna_name.model.gain(
 ```
 The method returns `int` or `float` number as resulting antenna gain in **dBi** unit. Depending on the argument passed to the constructor in step 2 above, the following keyword argument/arguments is/are to be passed to the method when calculating the antenna gain in any required direction:
 
-*For 'ITUF699' or 'ITUF1245' or 'ITUF1336lg' or 'ITUS465'*
+*For 'ITUF699' or 'ITUF1245' or 'ITUF1336lg' or 'ITUS465' or 'ITUS580'*
 
 | Keyword| Requirement | Value type   | Range/Option | Description           |
 |--|-------------|--------------|--------------|-----------------------|
