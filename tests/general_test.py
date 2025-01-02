@@ -126,3 +126,21 @@ my_antenna.model.show_patterns()
 
 # Delete antenna object
 del my_antenna
+
+# Create an object of ITUF1336o Class (omni antenna)
+my_antenna = Antenna('ITUF1336o')
+
+# Set arbitrary antenna's parameters
+my_antenna.model.set_params(
+    oper_freq_mhz=420,
+    max_gain_dbi=5,
+    pattern_type='average',
+    performance_type='typical',
+    tilt_type='none',
+)
+
+# Display antenna radiation patterns
+my_antenna.model.show_patterns()
+
+# Delete antenna object
+del my_antenna

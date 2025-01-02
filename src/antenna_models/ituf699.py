@@ -11,7 +11,7 @@ from base import BaseAntenna
 
 
 class ITUF699(BaseAntenna):
-    """ITU-F.699-8 Antenna Model."""
+    """ITU-R F.699-8 Antenna Model."""
     def __init__(self):
         super().__init__()
 

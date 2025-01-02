@@ -107,36 +107,57 @@ class BaseAntenna(ABC):
         # Update specs property
         self._update_specs()
 
-        # Extract horizontal pattern data from specs property
+        # ~ Extract horizontal pattern data from specs property ~
 
         # Get angles data along converting them to radians
         h_phi = np.radians(self.specs['h_pattern_datapoint']['phi'])
         # Get attenuation/loss data
         h_loss = self.specs['h_pattern_datapoint']['loss']
-        # Find the max loss value for scaling the radial axis
-        h_max_loss = max(h_loss)
 
-        # Extract vertical pattern data from specs property
+        # Convert non-numeric values to NaN
+        h_loss_cleaned = []
+        for loss in h_loss:
+            try:
+                h_loss_cleaned.append(float(loss))
+            except (ValueError, TypeError):
+                h_loss_cleaned.append(np.nan)
+
+        # Find the maximum and minimum values, ignoring NaN
+        max_h_loss = np.nanmax(h_loss_cleaned)
+        min_h_loss = np.nanmin(h_loss_cleaned)
+
+        # Find the max loss value for scaling the radial axis
+        h_scale = max_h_loss - min_h_loss
+
+        # ~ Extract vertical pattern data from specs property ~
 
         # Get angles data along converting them to radians
         v_theta = np.radians(self.specs['v_pattern_datapoint']['theta'])
         # Get attenuation/loss data
         v_loss = self.specs['v_pattern_datapoint']['loss']
+
+        # Convert non-numeric values to NaN
+        v_loss_cleaned = []
+        for loss in v_loss:
+            try:
+                v_loss_cleaned.append(float(loss))
+            except (ValueError, TypeError):
+                v_loss_cleaned.append(np.nan)
+
+        # Find the maximum and minimum values, ignoring NaN
+        max_v_loss = np.nanmax(v_loss_cleaned)
+        min_v_loss = np.nanmin(v_loss_cleaned)
+
         # Find the max loss value for scaling the radial axis
-        v_max_loss = max(v_loss)
+        v_scale = max_v_loss - min_v_loss
 
         # For omni antennas, h_max_loss or v_max_loss could be so small,
         # hence, to make better plot, it is either max of both, or 20 dB
+        if h_scale < 3:
+            h_scale = 4
 
-        max_val = max(h_max_loss, v_max_loss)
-        if max_val <=3:
-            h_max_loss = 20
-            v_max_loss = 20
-        else:
-            h_max_loss = max_val
-            v_max_loss = max_val
-
-
+        if v_scale < 3:
+            v_scale = 4
 
         # Create a figure with two polar subplots
         fig, (ax1, ax2) = plt.subplots(1, 2,
@@ -149,26 +170,38 @@ class BaseAntenna(ABC):
         ax1.set_theta_offset(np.pi / 2)  # rotate 90 deg. CCW
         ax1.set_theta_direction(-1)  # change direction to CW
         # Plot H-pattern
-        ax1.plot(h_phi, h_loss, label='H-plane', color='blue', linewidth=3)
+        ax1.plot(h_phi, h_loss_cleaned, label='H-plane', color='blue', linewidth=3)
         # Title for H-pattern
         ax1.set_title('H-plane', va='bottom', fontsize=12)
-        # Set 0 dB at the outer ring; max loss at the center
-        ax1.set_ylim(h_max_loss, 0)
-        # Move the radial labels to 135 degrees to avoid clutter
-        ax1.set_rlabel_position(135)
+        # Set min value at the outer ring; max loss at the center
+        # ax1.set_ylim(bottom=max_h_loss, top=min_h_loss)
+        ax1.set_ylim(bottom=h_scale, top=min_h_loss)
         # Custom ticks for the radial axis
-        ax1.set_yticks(np.linspace(0, h_max_loss, 5))
+        ax1.set_yticks(np.linspace(min_h_loss, h_scale, 5))
         # Custom tick labels
         ax1.set_yticklabels([f'{int(val)} dB' for val in
-                             np.linspace(0, h_max_loss,
+                             np.linspace(min_h_loss, h_scale,
                                          5)])
+        # Move the radial labels to 135 degrees to avoid clutter
+        ax1.set_rlabel_position(135)
+
 
         # Second polar plot (V-pattern):
 
         # Plot V-pattern
-        ax2.plot(v_theta, v_loss, label='V-plane', color='blue', linewidth=3)
+        ax2.plot(v_theta, v_loss_cleaned, label='V-plane', color='blue', linewidth=3)
         # Title for V-pattern
         ax2.set_title('E-plane', va='bottom', fontsize=12)
+        # Set min value at the outer ring; max loss at the center
+        ax2.set_ylim(bottom=v_scale, top=min_v_loss)
+        # Custom ticks for the radial axis
+        ax2.set_yticks(np.linspace(min_v_loss, v_scale, 5))
+        # Custom tick labels
+        ax2.set_yticklabels([f'{int(val)} dB' for val in
+                             np.linspace(min_v_loss, v_scale,
+                                         5)])
+        # Move the radial labels to 135 degrees
+        ax2.set_rlabel_position(135)
 
         # change default plot labels to vary betwen -180, 0, 180
         # 9 equally spaced ticks (0, 45, 90, ..., 360 degrees)
@@ -183,24 +216,13 @@ class BaseAntenna(ABC):
             ['0°', '45°', '90°', '135°', '180°', '-135°', '-90°',
              '-45°', ''])
 
-        # Set 0 dB at the outer ring; max loss at the center
-        ax2.set_ylim(v_max_loss, 0)
-        # Move the radial labels to 135 degrees
-        ax2.set_rlabel_position(135)
-        # Custom ticks for the radial axis
-        ax2.set_yticks(np.linspace(0, v_max_loss, 5))
-        # Custom tick labels
-        ax2.set_yticklabels([f'{int(val)} dB' for val in
-                             np.linspace(0, v_max_loss,
-                                         5)])
-
         # Add antenna settings/parameters to the figure
         info_txt = (
             f"{self.specs['name']}, "
             f"Freq.: {self.specs['frequency']} MHz. "
-            f"Beamwidth: {self.specs['h_width']:,.1f} H/"
-            f"{self.specs['v_width']:,.1f} V deg., "
-            f"Gain: {self.specs['gain']:,.1f} dBi, "
+            f"Beamwidth: {self.specs['h_width']} H / "
+            f"{self.specs['v_width']} V deg., "
+            f"Gain: {self.specs['gain']} dBi, "
             f"Tilting: {self.specs['tilt']} deg. "
             f"{self.specs['comment']}"
         )

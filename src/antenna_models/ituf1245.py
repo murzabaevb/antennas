@@ -12,7 +12,7 @@ from base import BaseAntenna
 
 
 class ITUF1245(BaseAntenna):
-    """ITU-F.1245-3 Antenna Model."""
+    """ITU-R F.1245-3 Antenna Model."""
     def __init__(self):
         super().__init__()
 
