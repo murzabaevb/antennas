@@ -27,7 +27,7 @@ class ITUS580(BaseAntenna):
             'range': (1000, 100000),
         },
 
-        # Antenna diameter (m)
+        # Equivalent diameter of antenna (m)
         'diameter_m': {
             'category': 'optional',
             'type': (int, float),

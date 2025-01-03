@@ -23,7 +23,7 @@ class ITUS465(BaseAntenna):
             'range': (2000, 31000),
         },
 
-        # Antenna diameter (m)
+        # Equivalent diameter of antenna (m)
         'diameter_m': {
             'category': 'optional',
             'type': (int, float),

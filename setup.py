@@ -17,6 +17,6 @@ setup(
     },
     license='GNU General Public License',
     license_files='https://www.gnu.org/licenses/',
-    keywords='itu,itu-r,antenna,pattern,gain,699,1245,1336',
+    keywords='itu,itu-r,antenna,pattern,gain,699,1245,1336, rpe',
 )
 

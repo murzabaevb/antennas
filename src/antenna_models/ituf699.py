@@ -23,7 +23,7 @@ class ITUF699(BaseAntenna):
             'range': (100, 86000),
         },
 
-        # Antenna diameter (m)
+        # Equivalent diameter of antenna (m)
         'diameter_m': {
             'category': 'optional',
             'type': (int, float),

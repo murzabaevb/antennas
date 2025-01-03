@@ -105,7 +105,7 @@ Depending on the argument passed to the constructor in step 2 above, the followi
 | Keyword      | Requirement | Value type   | Range             | Description                                                  |
 |--------------|-------------|--------------|-------------------|--------------------------------------------------------------|
 | `oper_freq_mhz` | optional    | `int, float` | `(1000, 100000)`  | operating frequency (MHz)                                    |
-|`diameter_m`| optional    | `int, float` | `(0.001, 14.999)` | antenna diameter (m)                                         |
+|`diameter_m`| optional    | `int, float` | `(0.001, 14.999)` | antenna's equivalent diameter (m)                            |
 |`d_to_l`| optional    | `int, float` | `(50, 10000)`     | Antenna diameter to wavelength ratio (both in the same unit) |
 
 *Note: although the frequency, ant. diameter, and D/lambda ratio are indicated as optional, the calculation method is based on D/lambda ratio. Therefore, if D/lambda ratio is not provided, then both frequency and ant. diameter have to be provided together.*
@@ -117,7 +117,7 @@ Depending on the argument passed to the constructor in step 2 above, the followi
 | Keyword      | Requirement | Value type   | Range                | Description                                                  |
 |--------------|-------------|--------------|----------------------|--------------------------------------------------------------|
 | `oper_freq_mhz` | optional    | `int, float` | `(2000, 31000)`      | operating frequency (MHz)                                    |
-|`diameter_m`| optional    | `int, float` | `(0.001, 99.999)`    | antenna diameter (m)                                         |
+|`diameter_m`| optional    | `int, float` | `(0.001, 99.999)`    | antenna's equivalent diameter (m)                                         |
 |`d_to_l`| optional    | `int, float` | `(0.001, 10000)`     | Antenna diameter to wavelength ratio (both in the same unit) |
 
 *Note: although the frequency, ant. diameter, and D/lambda ratio are indicated as optional, the calculation method is based on D/lambda ratio. Therefore, if D/lambda ratio is not provided, then both frequency and ant. diameter have to be provided together.*
@@ -129,7 +129,7 @@ Depending on the argument passed to the constructor in step 2 above, the followi
 | Keyword      | Requirement | Value type   | Range                | Description                   |
 |--------------|-----------|--------------|----------------------|-------------------------------|
 | `oper_freq_mhz` | mandatory | `int, float` | `(100, 86000)`       | operating frequency (MHz)|
-|`diameter_m`|optional| `int, float` | `(0.001, 99.999)`    | antenna diameter (m)|
+|`diameter_m`|optional| `int, float` | `(0.001, 99.999)`    | antenna's equivalent diameter (m)|
 |`max_gain_dbi`|optional| `int, float` | `(-29.9, 89.9)`      | max. main-lobe ant. gain (dBi)|
 |`beamwidth_deg`|optional| `int, float` | `(0.001, 179.999  )` | 3dB beamwidth (deg.)|
 
