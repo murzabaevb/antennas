@@ -1,2 +1,0 @@
-antenna_models
-exporters
