@@ -42,14 +42,18 @@ The project is designed to be modular and extensible, allowing users to implemen
    
 2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   py -m pip install -r requirements.txt
    ```
 
 3. Install the package in editable mode:
    ```bash
-   pip install -e .
+   py -m pip install .
    ```
 4. Run `tests/test_general.py` to test the overall functioning and functionalities of the package.
+   ```bash
+   cd tests
+   python test_general.py
+   ```
 ---
 
 ### Usage
